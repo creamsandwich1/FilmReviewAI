@@ -5,8 +5,8 @@ from django.template.loader import render_to_string
 
 # Create your views here.
 def model_view(request):
-    return HttpResponse('Страница модели')
+    return render(request, 'sentimentmodel/model_page.html')
 
 
 def home_page_view(request):
-    return HttpResponse('Главная страница')
+    return render(request, 'sentimentmodel/main_page.html')
