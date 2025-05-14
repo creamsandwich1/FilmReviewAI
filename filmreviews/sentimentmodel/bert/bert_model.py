@@ -9,7 +9,7 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 weights_path = os.path.join(settings.BASE_DIR, 'sentimentmodel',
-                            'bert', 'weights', '2', 'bsd2.pt')
+                            'bert', 'weights', '3', 'bsd1.pt')
 model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2).to(DEVICE)
 
 st = torch.load(weights_path)
@@ -35,4 +35,4 @@ def classificate(text):
 
     outputs = model(input_ids=input_ids, attention_mask=attention_mask)
     mark = torch.argmax(outputs.logits).item()
-    return str(mark)
+    return mark

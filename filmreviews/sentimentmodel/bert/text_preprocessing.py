@@ -6,6 +6,7 @@ import inflect
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from bs4 import BeautifulSoup
+from translate import Translator
 
 
 def text_preprocessing(text: str) -> str:
@@ -90,6 +91,15 @@ def normalize_text(text: str):
     process_funcs = [text_preprocessing, tokenize, remove_stopwords, lemmatization, join_text]
     for func in process_funcs:
         text = func(text)
+    return text
+
+
+def detect_ru_and_translate(text: str):
+    for char in text.strip():
+        if 'а' <= char <= 'я' or 'А' <= char <= 'Я':
+            translator = Translator(from_lang='russian', to_lang='english')
+            translation = translator.translate(text)
+            return translation
     return text
 
 
